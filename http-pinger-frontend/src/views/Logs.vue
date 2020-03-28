@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    About
+
+    Logs
+
   </v-container>
 </template>
 

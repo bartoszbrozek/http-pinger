@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer left v-model="drawer" app>
       <v-list dense>
-        <v-list-item v-for="(menu, id) in menuList" v-bind:key="id" link to="menu.to">
+        <v-list-item v-for="(menu, id) in menuList" v-bind:key="id" link :to="menu.to">
           <v-list-item-action>
             <v-icon v-html="menu.icon"></v-icon>
           </v-list-item-action>
@@ -15,7 +15,7 @@
 
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>HTTP Server Pinger</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
@@ -40,6 +40,8 @@ export default {
     drawer: null,
     menuList: [
       { to: "Dashboard", title: "Dashboard", icon: "mdi-home" },
+      { to: "Servers", title: "Servers", icon: "mdi-server" },
+      { to: "Logs", title: "Logs", icon: "mdi-format-list-numbered" },
       { to: "About", title: "About", icon: "mdi-information" }
     ]
   })

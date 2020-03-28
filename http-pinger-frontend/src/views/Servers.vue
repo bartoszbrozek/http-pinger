@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    About
+
+    Servers
+
   </v-container>
 </template>
 
