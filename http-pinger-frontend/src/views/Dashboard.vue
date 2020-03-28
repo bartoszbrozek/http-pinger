@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-row>About</v-row>
+
+    Dashboard
+
   </v-container>
 </template>
 
