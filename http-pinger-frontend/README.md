@@ -1,4 +1,4 @@
-# http-pinger
+# http-pinger-frontend
 
 ## Project setup
 ```
