@@ -94,15 +94,9 @@ export default {
 
   methods: {
     initialize() {
-      this.servers = [
-        {
-          id: 1,
-          name: "Server 1",
-          availability: 99.0,
-          ip: "1.2.3.4",
-          updated_at: "2020-05-02"
-        }
-      ];
+      this.$store.dispatch("server/getAll").then(() => {
+        this.servers = this.$store.getters["server/servers"];
+      });
     },
 
     editItem(item) {
