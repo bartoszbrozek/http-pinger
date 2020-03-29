@@ -1,9 +1,5 @@
 <template>
   <v-data-table :headers="headers" :items="servers" sort-by="calories" class="elevation-1">
-    <template v-slot:item.is_enabled="{ item }">
-      <v-simple-checkbox v-model="item.is_enabled" :ripple="false"></v-simple-checkbox>
-    </template>
-
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>Servers</v-toolbar-title>
@@ -66,20 +62,17 @@ export default {
       { text: "Availability", value: "availability" },
       { text: "IP", value: "ip" },
       { text: "Updated At", value: "updated_at" },
-      { text: "Enable", value: "is_enabled" },
       { text: "Actions", value: "actions", sortable: false }
     ],
     servers: [],
     editedIndex: -1,
     editedItem: {
       ip: "",
-      name: 0,
-      is_enabled: false
+      name: 0
     },
     defaultItem: {
       ip: "",
-      name: 0,
-      is_enabled: false
+      name: 0
     }
   }),
 
@@ -107,7 +100,6 @@ export default {
           name: "Server 1",
           availability: 99.0,
           ip: "1.2.3.4",
-          is_enabled: false,
           updated_at: "2020-05-02"
         }
       ];

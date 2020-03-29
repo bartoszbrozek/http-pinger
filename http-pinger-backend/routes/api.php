@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\ServerCollection;
+use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("/server", "ServerController@index");
+Route::get("/server/{id}", "ServerController@show");
+Route::post("/server", "ServerController@store");
+Route::put("/server/{id}", "ServerController@store");
+Route::delete("/server/{id}", "ServerController@destroy");
