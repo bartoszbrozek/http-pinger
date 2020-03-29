@@ -37,6 +37,11 @@ class ServerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'ip' => 'required|ip'
+        ]);
+
         $server = Server::create($request->all());
 
         return new ServerResource($server);
