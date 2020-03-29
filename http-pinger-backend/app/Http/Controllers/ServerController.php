@@ -16,7 +16,7 @@ class ServerController extends Controller
      */
     public function index()
     {
-        return ServerCollection::collection(Server::all());
+        return ServerResource::collection(Server::all());
     }
 
     /**
