@@ -19,14 +19,14 @@
     </v-app-bar>
 
     <v-content>
-      <v-container class="fill-height" fluid>
+      <v-container fluid>
         <v-row>
           <router-view></router-view>
         </v-row>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; {{ year }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -44,6 +44,12 @@ export default {
       { to: "Logs", title: "Logs", icon: "mdi-format-list-numbered" },
       { to: "About", title: "About", icon: "mdi-information" }
     ]
-  })
+  }),
+  computed: {
+    year: function() {
+      const date = new Date();
+      return date.getFullYear();
+    }
+  }
 };
 </script>
