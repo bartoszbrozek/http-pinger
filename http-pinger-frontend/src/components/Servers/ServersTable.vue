@@ -68,17 +68,17 @@ export default {
     editedIndex: -1,
     editedItem: {
       ip: "",
-      name: 0
+      name: ""
     },
     defaultItem: {
       ip: "",
-      name: 0
+      name: ""
     }
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "New Server" : "Edit Server";
     }
   },
 
@@ -107,7 +107,7 @@ export default {
 
     deleteItem(item) {
       const index = this.servers.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
+      confirm("Are you sure you want to delete this server?") &&
         this.servers.splice(index, 1);
     },
 
@@ -120,12 +120,10 @@ export default {
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.servers[this.editedIndex], this.editedItem);
-      } else {
-        this.servers.push(this.editedItem);
-      }
-      this.close();
+      this.$store.dispatch("server/add", this.editedItem).then(() => {
+        this.servers = this.$store.getters["server/servers"];
+        this.close();
+      });
     }
   }
 };

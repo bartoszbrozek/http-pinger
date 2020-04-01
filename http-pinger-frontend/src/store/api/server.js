@@ -5,4 +5,12 @@ export default class ServerAPI {
 
         return data.data
     }
+
+    async add(server) {
+        const res = await window.axios.post('/server', server)
+
+        let { data } = await res
+
+        return data.data
+    }
 }
