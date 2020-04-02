@@ -19,6 +19,16 @@ const actions = {
 
     async add({ commit }, server) {
         commit('ADD_SERVER', await api.add(server))
+    },
+
+    async edit({ commit }, server) {
+        commit('EDIT_SERVER', await api.edit(server))
+        commit('SET_SERVERS', await api.getAll())
+    },
+
+    async delete({ commit }, server) {
+        await api.delete(server)
+        commit('SET_SERVERS', await api.getAll())
     }
 }
 
@@ -28,8 +38,16 @@ const mutations = {
     },
 
     ADD_SERVER(state, server) {
-        state.servers.push(server)
-    }
+        if (server !== undefined) {
+            state.servers.push(server)
+        }
+    },
+
+    EDIT_SERVER(state, server) {
+        if (server !== undefined) {
+            state.servers.push(server)
+        }
+    },
 }
 
 export default {

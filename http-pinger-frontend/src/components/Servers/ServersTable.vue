@@ -22,9 +22,6 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.ip" label="IP"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-switch v-model="editedItem.isEnabled" label="Is Enabled"></v-switch>
-                  </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
@@ -78,7 +75,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Server" : "Edit Server";
+      return this.isEditing() ? "Edit Server" : "New Server";
     }
   },
 
@@ -93,6 +90,10 @@ export default {
   },
 
   methods: {
+    isEditing() {
+      return this.editedIndex > -1;
+    },
+
     initialize() {
       this.$store.dispatch("server/getAll").then(() => {
         this.servers = this.$store.getters["server/servers"];
@@ -106,9 +107,10 @@ export default {
     },
 
     deleteItem(item) {
-      const index = this.servers.indexOf(item);
-      confirm("Are you sure you want to delete this server?") &&
+      this.$store.dispatch("server/delete", item).then(() => {
         this.servers.splice(index, 1);
+        const index = this.servers.indexOf(item);
+      });
     },
 
     close() {
@@ -120,10 +122,17 @@ export default {
     },
 
     save() {
-      this.$store.dispatch("server/add", this.editedItem).then(() => {
-        this.servers = this.$store.getters["server/servers"];
-        this.close();
-      });
+      if (this.isEditing()) {
+        this.$store.dispatch("server/edit", this.editedItem).then(() => {
+          this.servers = this.$store.getters["server/servers"];
+          this.close();
+        });
+      } else {
+        this.$store.dispatch("server/add", this.editedItem).then(() => {
+          this.servers = this.$store.getters["server/servers"];
+          this.close();
+        });
+      }
     }
   }
 };
