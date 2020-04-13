@@ -1,6 +1,7 @@
 export default class ServerAPI {
     async getOne(server) {
-        const res = await window.axios.get(`/server/${server.id}`)
+        const id = typeof server.id !== 'undefined' ? server.id : server
+        const res = await window.axios.get(`/server/${id}`)
         let { data } = await res
 
         return data.data

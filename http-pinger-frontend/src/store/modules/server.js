@@ -4,17 +4,25 @@ const api = new ServerAPI
 
 const state = {
     servers: [],
+    server: {},
 }
 
 const getters = {
     servers: (state) => {
         return state.servers
+    },
+    server: (state) => {
+        return state.server
     }
 }
 
 const actions = {
     async getAll({ commit }) {
         commit('SET_SERVERS', await api.getAll())
+    },
+
+    async getOne({ commit }, id) {
+        commit('SET_SERVER', await api.getOne(id))
     },
 
     async add({ commit }, server) {
@@ -35,6 +43,10 @@ const actions = {
 const mutations = {
     SET_SERVERS(state, servers) {
         state.servers = servers
+    },
+
+    SET_SERVER(state, server) {
+        state.server = server
     },
 
     ADD_SERVER(state, server) {
